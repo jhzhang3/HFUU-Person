@@ -1,3 +1,9 @@
 2024-09-08
 1：今日：新建了github仓库，方便后续对学习内容进行管理，同时也上传了暑期实习的项目内容（django框架和psotman测试）
 2：明天：预计开始了解基础代码算法，牛客和力扣进行刷题
+
+2024-09-09
+1:今日：没有刷题，重新确定了一下接下来努力的方向，准备从事后端开发，设想先学python基础到中高阶算法，再学习java
+2:明天：开始学习python基础，并在leetcode上刷题,同时也要背六级单词
+         另外，先学一下这个网站：https://www.bilibili.com/video/BV1TrHuepERf/?spm_id_from=333.337.search-card.all.click&vd_source=b89c6189c2b2b434fe847c59699b0acb
+         计算机科班的基础视频，帮助我快速入门之前的知识。

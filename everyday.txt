@@ -7,3 +7,7 @@
 2:明天：开始学习python基础，并在leetcode上刷题,同时也要背六级单词
          另外，先学一下这个网站：https://www.bilibili.com/video/BV1TrHuepERf/?spm_id_from=333.337.search-card.all.click&vd_source=b89c6189c2b2b434fe847c59699b0acb
          计算机科班的基础视频，帮助我快速入门之前的知识。
+
+2024-09-10
+1:今日：背了50个单词，同时终于开始了leetcode上面刷题，第一题只会暴力求解，更加优秀的解需要用到哈希表。
+2：明天：继续刷题，熟悉一段时间的python基础语法，继续背单词

@@ -68,15 +68,14 @@ class Solution(object):
 字母异位词 是由重新排列源单词的所有字母得到的一个新单词。
 
 示例 1:
-
 输入: strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 输出: [["bat"],["nat","tan"],["ate","eat","tea"]]
-示例 2:
 
+示例 2:
 输入: strs = [""]
 输出: [[""]]
-示例 3:
 
+示例 3:
 输入: strs = ["a"]
 输出: [["a"]]
 '''
@@ -88,6 +87,46 @@ class Solution(object):
         """
         if strs == []:
             return [[]]
-            
+        hashtable={}
+        for str in strs:  # 枚举字符串
+            i=''.join((sorted(str)))  # 排序字符串，得到字母异位词
+            if i in hashtable:  # 如果哈希表中存在该字母异位词，则添加到该字母异位词的列表中
+                hashtable[i].append(str)   
+            else :
+                hashtable[i]=[str]  # 否则，创建该字母异位词的列表
+        return list(hashtable.values())  # 返回哈希表中所有值（即字母异位词的列表）
 
 
+'''
+4.最长连续序列
+
+给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。
+请你设计并实现时间复杂度为 O(n) 的算法解决此问题。
+
+示例 1:
+输入:nums = [100,4,200,1,3,2]
+输出:4
+解释：最长数字连续序列是 [1, 2, 3, 4]。它的长度为 4。
+
+示例 2:
+输入:nums = [0,3,7,2,5,8,4,6,0,1]
+输出:9
+'''
+
+class Solution(object):
+    def longestConsecutive(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        num_set=set(nums)  # 转换为集合，去除重复元素
+        max_lenth =0
+        for num in num_set:  # 枚举集合
+            if num - 1 not in num_set:  # 如果当前值-1不存在，则创建新的连续序列
+                current_num = num
+                current_length = 1
+                while current_num + 1 in num_set:  # 枚举连续序列
+                    current_num += 1
+                    current_length += 1
+                max_lenth = max(max_lenth, current_length)  # 更新最大长度
+        return max_lenth    

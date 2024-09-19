@@ -175,7 +175,7 @@ class Solution(object):
 
 
 '''
-15. 三数之和
+6. 三数之和
 
 提示
 给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 i != j、i != k 且 j != k ，
@@ -242,34 +242,60 @@ class Solution(object):
                     right -= 1
         
         return result
-    
+'''
+7. 接雨水
+困难
+相关标签
+相关企业
+给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+
+示例 1：
+输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]
+输出：6
+解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 
+
+示例 2：
+输入：height = [4,2,0,3,2,5]
+输出：9
+
+'''   
+
 class Solution(object):
-    def threeSum(self, nums):
+    def trap(self, height):
         """
-        :type nums: List[int]
-        :rtype: List[List[int]]
+        :type height: List[int]
+        :rtype: int
         """
-        nums.sort()
-        result = []
-        length = len(nums)
-        if nums==[]:
-            return []
-        for i in range(length):
-            if i >0 and nums[i]==nums[i-1]:
+        length = len(height)
+        if length < 3:
+            return 0
+        
+        left=0
+        right=1
+        trap=0
+
+        while left<length-1:
+            if right >= length:
+                left += 1
+                right = left + 1
                 continue
-            left,right=i+1,length-1
-            while left<right:
-                current_sum=nums[i]+nums[left]+nums[right]
-                if current_sum<0:
-                    left+=1
-                elif current_sum>0:
-                    right-=1
-                else:
-                    result.append([nums[i], nums[left], nums[right]])
-                    while left<right and nums[left]==nums[left+1]:
-                        left+=1
-                    while left<right and nums[right]==nums[right-1]:
-                        right-=1
-                    left+= i 
-                    right-= i 
-        return result                                               
+            
+            if height[left] > height[right]:
+                right +=1
+                if right < length and height[left+1] < height[right] and height[left] > height[right]:
+                    trap += height[right]*(right-left+1)
+                    for i in range(left+1,right):
+                        trap -= height[i]
+                    trap=trap-height[right]
+                    left=right
+                    right +=1
+                
+            else:
+                trap += height[left]*(right-left+1)
+                for i in range(left,right):
+                    trap -= height[i]
+                trap=trap-height[left]
+                left=right
+                right +=1
+
+        return trap

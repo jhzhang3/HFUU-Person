@@ -259,7 +259,6 @@ class Solution(object):
 输出：9
 
 '''   
-
 class Solution(object):
     def trap(self, height):
         """
@@ -269,33 +268,22 @@ class Solution(object):
         length = len(height)
         if length < 3:
             return 0
-        
-        left=0
-        right=1
-        trap=0
 
-        while left<length-1:
-            if right >= length:
-                left += 1
-                right = left + 1
-                continue
-            
-            if height[left] > height[right]:
-                right +=1
-                if right < length and height[left+1] < height[right] and height[left] > height[right]:
-                    trap += height[right]*(right-left+1)
-                    for i in range(left+1,right):
-                        trap -= height[i]
-                    trap=trap-height[right]
-                    left=right
-                    right +=1
-                
-            else:
-                trap += height[left]*(right-left+1)
-                for i in range(left,right):
-                    trap -= height[i]
-                trap=trap-height[left]
-                left=right
-                right +=1
+        left_max = [0] * length
+        right_max = [0] * length
+        trap = 0
+
+        for i in range(length):     
+            left_max[i] = max(left_max[i - 1], height[i])    # 左侧最大值
+
+        right_max[-1]=height[-1]    # 右侧最大值
+        for i in range(length-2, -1, -1):    
+            right_max[i] = max(right_max[i + 1], height[i])  
+
+        for i in range(length):
+            current_area = min(left_max[i], right_max[i])
+            if height[i] < current_area:
+                trap += current_area - height[i]
 
         return trap
+        

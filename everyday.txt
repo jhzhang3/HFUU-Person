@@ -42,3 +42,7 @@
 1:今日：把昨天的题目做完了，leetcode上做了一道题，接水滴问题，双指针，有点难，一直没做出来，看了视频解析做出来了
 2:明天：继续刷题，leetcode刷题，英语继续背诵
 
+2024-09-22
+1:今日：leetcode上滑动窗口问题吗，https://leetcode.cn/problems/longest-substring-without-repeating-characters/solutions/3982/hua-dong-chuang-kou-by-powcai
+        大佬利用队列解决问题，总结好评，英语继续背诵
+2:明天：继续刷题，leetcode刷题，英语继续背诵

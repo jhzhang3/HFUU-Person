@@ -287,3 +287,56 @@ class Solution(object):
 
         return trap
         
+'''
+8. 无重复字符的最长子串
+
+给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串的长度。
+
+
+示例 1:
+输入: s = "abcabcbb"
+输出: 3 
+解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+
+示例 2:
+输入: s = "bbbbb"
+输出: 1
+解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+
+示例 3:
+输入: s = "pwwkew"
+输出: 3
+解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
+     请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+     
+'''
+
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        char_set = set()
+        left = 0
+        max_length = 0
+
+        for right in range(len(s)):
+            # 如果字符在集合中，左指针右移，直到移除重复字符
+            while s[right] in char_set:
+                char_set.remove(s[left])
+                left += 1
+                print(right,char_set)
+            # 添加当前字符到集合中
+            char_set.add(s[right])
+            # 更新最长长度
+            max_length = max(max_length, right - left + 1)
+
+        return max_length 
+    
+#注释：本题的解法是滑动窗口法，即用两个指针left和right，分别指向窗口的左右边界，
+# 大神总结滑动窗口·算法的步骤：https://leetcode.cn/problems/longest-substring-without-repeating-characters/solutions/3982/hua-dong-chuang-kou-by-powcai
+
+
+s="abcabcbb"
+print(Solution().lengthOfLongestSubstring(s)) # 3

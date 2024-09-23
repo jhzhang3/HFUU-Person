@@ -19,6 +19,9 @@
 输出：[0,1]
 
 '''
+from typing import Counter
+
+
 class Solution(object):
     def twoSum(self, nums, target):
         """
@@ -317,7 +320,7 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        char_set = set()
+        char_set = set()  # 字符集合，set()为创建一个不能重复元素的集合    
         left = 0
         max_length = 0
 
@@ -326,7 +329,6 @@ class Solution(object):
             while s[right] in char_set:
                 char_set.remove(s[left])
                 left += 1
-                print(right,char_set)
             # 添加当前字符到集合中
             char_set.add(s[right])
             # 更新最长长度
@@ -338,5 +340,41 @@ class Solution(object):
 # 大神总结滑动窗口·算法的步骤：https://leetcode.cn/problems/longest-substring-without-repeating-characters/solutions/3982/hua-dong-chuang-kou-by-powcai
 
 
-s="abcabcbb"
-print(Solution().lengthOfLongestSubstring(s)) # 3
+'''
+9. 找到字符串中所有字母异位词
+
+给定两个字符串 s 和 p.找到 s 中所有p的异位词的子串,返回这些子串的起始索引。不考虑答案输出的顺序。
+
+ 
+
+示例 1:
+输入: s = "cbaebabacd", p = "abc"
+输出: [0,6]
+解释:
+起始索引等于 0 的子串是 "cba", 它是 "abc" 的异位词。
+起始索引等于 6 的子串是 "bac", 它是 "abc" 的异位词。
+
+示例 2:
+输入: s = "abab", p = "ab"
+输出: [0,1,2]
+解释:
+起始索引等于 0 的子串是 "ab", 它是 "ab" 的异位词。
+起始索引等于 1 的子串是 "ba", 它是 "ab" 的异位词。
+起始索引等于 2 的子串是 "ab", 它是 "ab" 的异位词。
+
+'''
+class Solution(object):
+    def findAnagrams(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: List[int]
+        """
+
+        
+
+
+# 示例用法
+s = "cbaebabacd"
+p = "abc"
+print(Solution().findAnagrams(s, p))  # 输出: [0, 6]

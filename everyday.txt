@@ -46,3 +46,10 @@
 1:今日：leetcode上滑动窗口问题吗，https://leetcode.cn/problems/longest-substring-without-repeating-characters/solutions/3982/hua-dong-chuang-kou-by-powcai
         大佬利用队列解决问题，总结好评，英语继续背诵
 2:明天：继续刷题，leetcode刷题，英语继续背诵
+
+2024-09-23      
+1:今日：每天刷题感觉没有有实质性增长，该不会还是不会，需要看各种解析，还是得看一下网站系统学习一下：https://programmercarl.com/
+        英语日常背诵单词，复习旧单词.
+2:明天：继续刷题，leetcode刷题，英语继续背诵
+
+

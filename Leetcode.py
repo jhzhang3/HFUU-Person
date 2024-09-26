@@ -378,3 +378,42 @@ class Solution(object):
 s = "cbaebabacd"
 p = "abc"
 print(Solution().findAnagrams(s, p))  # 输出: [0, 6]
+
+
+
+import sys
+input = sys.stdin.read
+
+def main():
+    data = input().split()  # 读取输入数据，以空格为分隔符
+    index = 0                    # 索引
+    n = int(data[index])         # 读取数组长度
+    index += 1                  # 索引+1
+    vec = []                    # 数组
+    for i in range(n):                     # 读取数组元素
+        vec.append(int(data[index + i]))          
+    index += n                 # 索引+数组长度
+
+    p = [0] * n             # 前缀和数组
+    presum = 0             # 前缀和
+    for i in range(n):        # 计算前缀和
+        presum += vec[i]           
+        p[i] = presum              
+    results = []                    # 结果数组
+    while index < len(data):         # 读取查询区间
+        a = int(data[index])            # 读取查询区间左端点
+        b = int(data[index + 1])             # 读取查询区间右端点
+        index += 2                     # 索引+2
+
+        if a == 0:            # 左端点为0，则查询区间为整个数组
+            sum_value = p[b]         # 计算前缀和
+        else:
+            sum_value = p[b] - p[a - 1]         # 计算前缀和
+
+        results.append(sum_value)          # 结果数组添加前缀和值
+
+    for result in results:      # 输出结果数组
+        print(result)                # 输出结果
+
+if __name__ == "__main__":
+    main()

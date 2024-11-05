@@ -415,5 +415,93 @@ def main():
     for result in results:      # 输出结果数组
         print(result)                # 输出结果
 
-if __name__ == "__main__":
-    main()
+
+a=[0,4,26,40,45,50,51,52,53]
+b=[0,5,15,40,60,70,73,74,75]
+c=[0,5,15,40,80,90,95,98,100]
+num=0
+maxtotal=0
+max_i, max_j, max_k = -1, -1, -1
+for i in range(0,9):
+    for j in range(0,9):
+        for k in range(0,9):
+            total=a[i]+b[k]+c[j]
+            if(i+k+j==8):
+                num+=1
+                print((total),i,j,k)
+                if total > maxtotal:  # 更新最大的总和及对应的 i, j, k
+                    maxtotal = total
+                    max_i, max_j, max_k = i, j, k
+print(maxtotal,max_i,max_j,max_k)
+
+
+
+
+
+'''
+10:编写一个算法来判断一个数 n 是不是快乐数。
+
+「快乐数」定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。如果 可以变为  1，那么这个数就是快乐数。
+
+如果 n 是快乐数就返回 True ；不是，则返回 False 。
+
+示例：
+
+输入：19
+输出：true
+解释：
+1^2 + 9^2 = 82
+8^2 + 2^2 = 68
+6^2 + 8^2 = 100
+1^2 + 0^2 + 0^2 = 1
+
+#思路
+这道题目看上去貌似一道数学问题，其实并不是！
+
+题目中说了会 无限循环，那么也就是说求和的过程中，sum会重复出现，这对解题很重要！
+
+正如：关于哈希表，你该了解这些！ (opens new window)中所说，当我们遇到了要快速判断一个元素是否出现集合里的时候，就要考虑哈希法了。
+
+所以这道题目使用哈希法，来判断这个sum是否重复出现，如果重复了就是return false， 否则一直找到sum为1为止。
+
+判断sum是否重复出现就可以使用unordered_set。
+
+还有一个难点就是求和的过程，如果对取数值各个位上的单数操作不熟悉的话，做这道题也会比较艰难。
+
+'''
+
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        record = set()
+
+        while True:
+            n = self.get_sum(n)
+            if n == 1:
+                return True
+
+            # 如果中间结果重复出现，说明陷入死循环了，该数不是快乐数
+            if n in record:
+                return False
+            else:
+                record.add(n)
+
+    def get_sum(self, n: int) -> int:
+        new_num = 0
+        while n:
+            n, r = divmod(n, 10)
+            new_num += r ** 2
+        return new_num
+
+
+
+    def div(self, n: int):    # 除法版本
+        new_num = 0
+        while n:
+            r=n%10
+            n=n//10
+            new_num += r ** 2
+
+        return new_num
+
+ans = Solution().isHappy(19)
+print(ans)

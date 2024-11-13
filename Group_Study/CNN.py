@@ -4,57 +4,10 @@ import matplotlib.pyplot as plt
 #cnn卷积学习来源：https://blog.csdn.net/rocling/article/details/103831994
 #Alexnet经典论文讲解：https://www.bilibili.com/video/BV1aW4y1k74S?spm_id_from=333.788.videopod.sections&vd_source=b89c6189c2b2b434fe847c59699b0acb
 #不同卷积核介绍：https://blog.csdn.net/mrliuzhao/article/details/106011640
+#CNN笔记：https://blog.csdn.net/v_JULY_v/article/details/51812459?ops_request_misc=%257B%2522request%255Fid%2522%253A%25220C44DCA0-0045-49CD-9D9B-E470EA5AA1B1%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=0C44DCA0-0045-49CD-9D9B-E470EA5AA1B1&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~top_positive~default-2-51812459-null-null.nonecase&utm_term=cnn&spm=1018.2226.3001.4450
+#图解CNN：https://blog.csdn.net/v_JULY_v/article/details/79434745?spm=1001.2014.3001.5502
+#CNN视频讲解：https://www.bilibili.com/video/BV1fY411H7g8/?spm_id_from=333.788.videopod.sections&vd_source=b89c6189c2b2b434fe847c59699b0acb
 
-
-#ImageFilter类是用于实现卷积操作
-class ImageFilter:
-    
-    def __init__(self, image_path, kernel):    # 构造函数
-        self.srcImg = plt.imread(image_path)    # 读取图片
-        self.kernel = kernel                      # 卷积核
-        self.k_size = kernel.shape[0]              # 卷积核大小
-        self.dstImg = None                         # 卷积结果
-
-    def generate_dst(self):                          # 生成卷积结果
-        m, n, n_channel = self.srcImg.shape                 # 图片大小
-        self.dstImg = np.zeros((m - self.k_size + 1, n - self.k_size + 1, n_channel))         # 卷积结果大小
-        return self.dstImg                       
-
-    def conv_2d(self):                              # 卷积
-        self.generate_dst()                          # 生成卷积结果
-        self._conv()                                 # 卷积操作
-        return self.dstImg                            # 返回卷积结果
-
-    def _conv(self):
-        for i in range(self.dstImg.shape[0]):                        
-            for j in range(self.dstImg.shape[1]):       
-                for k in range(self.dstImg.shape[2]):                   
-                    value = self._con_each(self.srcImg[i:i + self.k_size, j:j + self.k_size, k])         # 卷积操作
-                    self.dstImg[i, j, k] = value
-
-    def _con_each(self, src_block):                            # 卷积操作
-        pixel_count = self.kernel.size                          # 卷积核大小
-        pixel_sum = 0                                             # 卷积核和像素点乘积之和
-        _src = src_block.flatten()                                 # 展开图片像素
-        _kernel = self.kernel.flatten()                           # 展开卷积核
-
-        for i in range(pixel_count):                            # 卷积操作
-            pixel_sum += _src[i] * _kernel[i]                     # 卷积核和像素点乘积之和
-
-        value = pixel_sum / pixel_count                           # 卷积结果
-        value = max(0, min(value, 255))                         # 限制值在[0, 255]之间
-
-        return value
-
-    def test_conv(self):                              # 测试卷积
-        plt.figure()                                 # 显示图片
-        plt.subplot(121)                             # 显示原图
-        plt.imshow(self.srcImg)                  
-
-        dst = self.conv_2d()                         # 卷积操作
-        plt.subplot(122)                             # 显示卷积结果
-        plt.imshow(dst)                             # 显示卷积结果
-        plt.show()                                   # 显示图片
 
 #下面是关于卷积核的笔记
 # 卷积核1:均值滤波和高斯滤波
@@ -180,6 +133,55 @@ LoG算子的核是一个5*5的矩阵,分别对应于x方向和y方向的梯度,�
 
 '''
 
+#ImageFilter类是用于实现卷积操作
+class ImageFilter:
+    
+    def __init__(self, image_path, kernel):    # 构造函数
+        self.srcImg = plt.imread(image_path)    # 读取图片
+        self.kernel = kernel                      # 卷积核
+        self.k_size = kernel.shape[0]              # 卷积核大小
+        self.dstImg = None                         # 卷积结果
+
+    def generate_dst(self):                          # 生成卷积结果
+        m, n, n_channel = self.srcImg.shape                 # 图片大小
+        self.dstImg = np.zeros((m - self.k_size + 1, n - self.k_size + 1, n_channel))         # 卷积结果大小
+        return self.dstImg                       
+
+    def conv_2d(self):                              # 卷积
+        self.generate_dst()                          # 生成卷积结果
+        self._conv()                                 # 卷积操作
+        return self.dstImg                            # 返回卷积结果
+
+    def _conv(self):
+        for i in range(self.dstImg.shape[0]):                        
+            for j in range(self.dstImg.shape[1]):       
+                for k in range(self.dstImg.shape[2]):                   
+                    value = self._con_each(self.srcImg[i:i + self.k_size, j:j + self.k_size, k])         # 卷积操作
+                    self.dstImg[i, j, k] = value
+
+    def _con_each(self, src_block):                            # 卷积操作
+        pixel_count = self.kernel.size                          # 卷积核大小
+        pixel_sum = 0                                             # 卷积核和像素点乘积之和
+        _src = src_block.flatten()                                 # 展开图片像素
+        _kernel = self.kernel.flatten()                           # 展开卷积核
+
+        for i in range(pixel_count):                            # 卷积操作
+            pixel_sum += _src[i] * _kernel[i]                     # 卷积核和像素点乘积之和
+
+        value = pixel_sum / pixel_count                           # 卷积结果
+        value = max(0, min(value, 255))                         # 限制值在[0, 255]之间
+
+        return value
+
+    def test_conv(self):                              # 测试卷积
+        plt.figure()                                 # 显示图片
+        plt.subplot(121)                             # 显示原图
+        plt.imshow(self.srcImg)                  
+
+        dst = self.conv_2d()                         # 卷积操作
+        plt.subplot(122)                             # 显示卷积结果
+        plt.imshow(dst)                             # 显示卷积结果
+        plt.show()                                   # 显示图片
 
 
 # 使用示例
@@ -191,9 +193,4 @@ test_kernel = np.array([[-1, -1, -1],
 
 image_filter = ImageFilter(image_path, test_kernel)      
 image_filter.test_conv()   
-
-
-
-
-
 

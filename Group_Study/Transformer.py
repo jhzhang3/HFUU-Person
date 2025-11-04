@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 '''
 VIT论文讲解：https://www.bilibili.com/video/BV15P4y137jb?spm_id_from=333.788.videopod.sections&vd_source=b89c6189c2b2b434fe847c59699b0acb
 vit代码：https://www.bilibili.com/video/BV1Xwc6eoEBa?spm_id_from=333.788.videopod.sections&vd_source=b89c6189c2b2b434fe847c59699b0acb
@@ -16,5 +17,7 @@ Attention(Q,K,V)=softmax(QK^T/√d_k)V
 维度的话：d_k=d_v=d_model/h，h是头的个数（W的个数），d_model是模型的维度。
 
 '''
+=======
+>>>>>>> ca1a2f833dce82b7e83876e1224fcefa05d56069
 
 

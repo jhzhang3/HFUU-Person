@@ -56,3 +56,18 @@ DATABASES = {
 ![增查，借助于视图](Py_developer_images/11.png)
 ![可以设置排序，顺序以及倒序](Py_developer_images/13.png)
 ![改，删](Py_developer_images/12.png)
+
+
+## 2.7 数据写入
+用来写后端代码。后端必然需要和数据库打交道，在Django中对于数据库模型一般写在models.py文件中。当写好之后，需要在setting文件中配置引入'book'，见图10 
+![](Py_developer_images/10.png)
+执行如下命令：
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+makemigrations的作用是Django会去检查创建或修改数据库，如果不合法会给出提示。当第一次执行该操作，会在app下面创建migrations目录，并创建0001_inital.py文件，文件中记录了当前的建表、依赖等信息。执行完makemigrations只是生成了对应的sql语句，还并没真正将改动迁移到数据库中。需要执行migrate才能将改动迁移到数据库，完成建表、修改字段等操作。所以综上所述，makemigrations生成ddl（数据库模式定义语言），migrate真正地去执行ddl。
+
+## 2.8 Mate配置
+可以设置数据表名，否则使用默认的表名“book_book”,前面book为app名，Book为模型名。还可以设置数据展示的顺序，配置一下ordering
+![配置Mate](Py_developer_images/14.png)
